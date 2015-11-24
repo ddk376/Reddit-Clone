@@ -1,0 +1,11 @@
+<ul>
+<% parent_comment.child_comments.each do |comment| %>
+  <li>
+  <p>Comment author: <%=comment.author%></p>
+  <p>Date Created: <%= comment.created_at %></p>
+  <a href="<%= comment_url(comment) %>" ><p><%=comment.content%></p></a>
+  </li>
+  <%= render "comments/comment", parent_comment: comment %>
+
+<% end %>
+</ul>

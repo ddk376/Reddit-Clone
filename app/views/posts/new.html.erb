@@ -1,0 +1,39 @@
+<h1>Create new post</h1>
+
+<form action="<%= posts_url %>" method="POST">
+  <%= authenticate_action %>
+  <p>Subs:</p>
+  <% @subs.each do |sub| %>
+   <p>
+    <%=sub.title%>
+    <input type="checkbox"
+           name="sub_id[]"
+           value="<%= sub.id %>"
+      <%="checked=\"yes\"" if sub.id.to_s == params[:sub_id] %>>
+    </p>
+  <% end %>
+
+
+  <br>
+
+  <label for="post_title">Title:</label>
+  <input type="text"
+         name="post[title]"
+         value="<%= @post.title %>"
+         id="post_title">
+  <br>
+  <label for="post_url">Url:</label>
+  <input type="text" name="post[url]" value="">
+  <br>
+  <label for="post_content">Content:</label>
+  <textarea cols="50" rows="5"
+         name="post[content]"
+         id="post_content"><%= @post.content %></textarea>
+  <input type="hidden"
+         name="post[author_id]"
+         value="<%=current_user.id%>">
+
+
+    <button>Submit</button>
+
+</form>

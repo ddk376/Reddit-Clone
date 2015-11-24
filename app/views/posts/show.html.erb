@@ -1,0 +1,30 @@
+
+<h1><%=@post.title%></h1>
+<% if @post.author == current_user %>
+  <a href="<%=edit_post_url(@post)%>"><button>Edit post</button></a>
+
+  <form action="<%=post_url(@post)%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <%= authenticate_action %>
+    <button>Delete post</button>
+
+  </form>
+
+<% end %>
+<p>Author: <%=@post.author%></p>
+<p><%=@post.content%></p>
+
+<label>Relevant Subs</label>
+<% @post.subs.each do |sub| %>
+  <br>
+  <a href="<%=sub_url(sub)%>"><%= sub.title %></a>
+<% end %>
+<br><br>
+<a href="<%= new_post_comment_url(@post) %>">Write a new comment</a>
+
+<br><br><br>
+<label>Comments:</label>
+
+<% @comments.each do |comment| %>
+  <%= render "comments/comment", parent_comment: comment %>
+<% end %>

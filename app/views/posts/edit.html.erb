@@ -1,0 +1,37 @@
+<h1>Edit post</h1>
+
+<form action="<%= post_url(@post) %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <%= authenticate_action %>
+  <p>Subs:</p>
+  <% @subs.each do |sub| %>
+   <p>
+    <%=sub.title%>
+    <input type="checkbox"
+           name="sub_id[]"
+           value="<%= sub.id %>"
+      <%="checked=\"yes\"" if sub.id.to_s == params[:sub_id] %>>
+   </p>
+  <% end %>
+
+  <br>
+
+  <label for="post_title">Title:</label>
+  <input type="text"
+         name="post[title]"
+         value="<%= @post.title %>"
+         id="post_title">
+  <br>
+  <label for="post_url">Url:</label>
+  <input type="text" name="post[url]" value="">
+  <br>
+  <label for="post_content">Content:</label>
+  <textarea cols="50" rows="5"
+         name="post[content]"
+         id="post_content"><%= @post.content %></textarea>
+
+
+
+    <button>Submit</button>
+
+</form>

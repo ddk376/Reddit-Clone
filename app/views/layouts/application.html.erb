@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RedditClone</title>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <a href="<%=subs_url%>">Subs</a>
+
+  <% if logged_in? %>
+    <form class="" action="<%= session_url %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <%= authenticate_action %>
+      <button>Sign out</button>
+    </form>
+  <% else %>
+    <a href="<%=new_user_url%>"><button>Sign up</button></a>
+    <a href="<%=new_session_url%>"><button>Sign in</button></a>
+  <% end %>
+
+
+<%= yield %>
+
+</body>
+</html>

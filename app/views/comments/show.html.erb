@@ -1,0 +1,23 @@
+<p>Comment author: <%= @comment.author %> </p>
+<label>Body: </label>
+<a href="<%= comment_url(@comment) %>"><%= @comment.content %></a>
+
+<h1>Reply to comment</h1>
+
+<form action="<%= comments_url(@comment) %>" method="POST">
+  <%= authenticate_action %>
+  <label for="comment_text">Text:</label>
+  <textarea cols="50" rows="5"
+         name="comment[content]"
+         id="comment_text"></textarea>
+  <br>
+  <input type="hidden"
+         name="comment[parent_comment_id]"
+         value="<%= @comment.id %>">
+
+    <button>Submit</button>
+
+</form>
+
+
+<%= render "comments/comment", parent_comment: @comment %>

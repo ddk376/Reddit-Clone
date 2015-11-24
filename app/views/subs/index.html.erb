@@ -1,0 +1,12 @@
+
+<h1>All subs</h1>
+
+<% if logged_in? %>
+  <a href="<%=new_sub_url%>"><button>Create new sub</button></a>
+<% end %>
+
+<ul>
+  <% @subs.each do |sub| %>
+    <li> <a href="<%=sub_url(sub)%>"><%=sub.title%></a></li>
+  <% end %>
+</ul>
