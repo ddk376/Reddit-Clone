@@ -21,6 +21,8 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    post = Post.find(@comment.post_id)
+    @all_comments = post.comments_by_parent_id
     render :show
   end
 

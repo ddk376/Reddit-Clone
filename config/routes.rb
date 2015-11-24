@@ -6,10 +6,19 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new]
   end
   resources :posts, except: :index do
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
     resources :comments, only: [:new, :show, :create]
   end
 
-  resources :comments, only: [:show, :create]
+  resources :comments, only: [:show, :create] do
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
+  end
 
   root :to => "users#new"
 end

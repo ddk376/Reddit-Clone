@@ -13,5 +13,19 @@ class Post < ActiveRecord::Base
     through: :post_subs,
     source: :sub
 
-  has_many :comments
+  has_many :comments,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+
+  has_many :votes, as: :votable
+
+  def comments_by_parent_id
+    hash = Hash.new{|h,k| h[k]= Array.new}
+    all_comments = self.comments include: :author
+    all_comments.each do |comment|
+      hash[comment.parent_comment_id] << comment
+    end
+    hash
+  end
 end

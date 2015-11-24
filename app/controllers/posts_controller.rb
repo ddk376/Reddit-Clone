@@ -48,7 +48,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.where("parent_comment_id IS NULL")
+    @all_comments = @post.comments_by_parent_id #includes: :author
     render :show
   end
 

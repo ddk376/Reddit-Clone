@@ -1,4 +1,3 @@
-
 <h1><%=@post.title%></h1>
 <% if @post.author == current_user %>
   <a href="<%=edit_post_url(@post)%>"><button>Edit post</button></a>
@@ -25,6 +24,6 @@
 <br><br><br>
 <label>Comments:</label>
 
-<% @comments.each do |comment| %>
-  <%= render "comments/comment", parent_comment: comment %>
+<% @all_comments[nil].each do |comment| %>
+  <%= render "comments/comment", parent_comment: comment, all_comments: @all_comments %>
 <% end %>
