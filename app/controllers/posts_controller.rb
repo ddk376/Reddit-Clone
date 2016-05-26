@@ -48,7 +48,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @all_comments = @post.comments_by_parent_id #includes: :author
+    @all_comments = @post.comments_by_parent_id
     render :show
   end
 
@@ -58,6 +58,17 @@ class PostsController < ApplicationController
     redirect_to subs_url
   end
 
+  def upvote
+    post = Post.find(params[:id])
+    post.votes.create({value: +1})
+    redirect_to post_url(post)
+  end
+
+  def downvote
+    post = Post.find(params[:id])
+    post.votes.create({value: -1})
+    redirect_to post_url(post)
+  end
   private
 
   def post_params

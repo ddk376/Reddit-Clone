@@ -12,4 +12,13 @@ class Sub < ActiveRecord::Base
     through: :post_subs,
     source: :post
 
+  def sort_posts_by_score
+    fail
+    
+    hash = Hash.new() { |h,k| h[k] = Array.new }
+    self.posts.each do |post|
+      hash[post.score] << post
+    end
+    hash.sort_by { |k,v| k}.reverse
+  end
 end

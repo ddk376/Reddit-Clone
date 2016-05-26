@@ -15,4 +15,12 @@ class Comment < ActiveRecord::Base
     class_name: "Comment",
     foreign_key: :parent_comment_id
   has_many :votes, as: :votable
+
+  def num_of_upvotes
+    self.votes.where("value = 1").length
+  end
+
+  def num_of_downvotes
+    self.votes.length - self.num_of_upvotes
+  end
 end

@@ -1,15 +1,26 @@
-<h1>Title:<%=@sub.title%></h1>
-<p>Description:<%=@sub.description%></p>
-<p>Moderator:<%=@sub.moderator%></p>
+<h1>Title:<%= @sub.title %></h1>
+<p>Description:<%= @sub.description %></p>
+<p>Moderator:<%= @sub.moderator %></p>
 <% if logged_in? %>
   <% if @sub.moderator == current_user %>
     <a href="<%=edit_sub_url(@sub)%>"><button>Edit sub</button></a>
   <% end %>
-  <a href="<%=new_sub_post_url(@sub)%>"><button>Create new post</button></a>
+    <a href="<%=new_sub_post_url(@sub)%>"><button>Create new post</button></a>
 <% end %>
 
 <ul>
-  <% @sub.posts.each do |post| %>
-    <li> <a href="<%=post_url(post)%>"><%=post.title%></a></li>
+  <% @posts.each do |key, array| %>
+    <% array.each do |post| %>
+      <li><a href="<%=post_url(post)%>"><%=post.title%></a>
+        <form action="<%= upvote_post_url %>" method="post">
+          <%= authenticate_action %>
+          <input type="submit" value="UpVote">
+        </form>
+        <form action="<%= downvote_post_url %>" method="post">
+          <%= authenticate_action %>
+          <input type="submit" value="DownVote">
+        </form>
+      </li>
+    <% end %>
   <% end %>
 </ul>

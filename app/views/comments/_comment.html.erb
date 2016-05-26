@@ -4,6 +4,14 @@
   <li>
   <p>Comment author: <%=comment.author%></p>
   <p>Date Created: <%= comment.created_at %></p>
+  <form action="<%= upvote_comment_url %>" method="post">
+    <%= authenticate_action %>
+    <input type="submit" value="UpVote">
+  </form>
+  <form action="<%= downvote_comment_url %>" method="post">
+    <%= authenticate_action %>
+    <input type="submit" value="DownVote">
+  </form>
   <a href="<%= comment_url(comment) %>" ><p><%=comment.content%></p></a>
   </li>
   <%= render "comments/comment", parent_comment: comment, all_comments: all_comments %>

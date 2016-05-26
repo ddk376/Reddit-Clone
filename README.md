@@ -7,4 +7,4 @@ go to `localhost`
 Optimzation of N+1 queries
 Reduced querying of children comments from O(n**2) to O(n)
 Implements polymorphic votable on posts and comments with unsigned integer `+1` and `-1`
-member route to upvote posts and comments
+member route to upvote/downvote posts and comments

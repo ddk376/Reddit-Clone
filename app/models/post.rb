@@ -20,6 +20,13 @@ class Post < ActiveRecord::Base
 
   has_many :votes, as: :votable
 
+  def num_of_upvotes
+    self.votes.where("value = 1").length
+  end
+
+  def num_of_downvotes
+    self.votes.length - self.num_of_upvotes
+  end
   def comments_by_parent_id
     hash = Hash.new{|h,k| h[k]= Array.new}
     all_comments = self.comments include: :author
@@ -27,5 +34,9 @@ class Post < ActiveRecord::Base
       hash[comment.parent_comment_id] << comment
     end
     hash
+  end
+
+  def score
+    self.votes.map{|vote| vote.value }.inject(0){|sum, n| sum + n }
   end
 end
