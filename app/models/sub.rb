@@ -13,8 +13,8 @@ class Sub < ActiveRecord::Base
     source: :post
 
   def sort_posts_by_score
-    fail
-    
+
+
     hash = Hash.new() { |h,k| h[k] = Array.new }
     self.posts.each do |post|
       hash[post.score] << post
